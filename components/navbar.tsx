@@ -144,7 +144,7 @@ export function Navbar() {
                 </Link>
               ))}
               <a
-                href="https://monitor.nexulean.tech"
+                href="https://monitor.nexulean.info"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-sm font-medium text-gray-300 hover:text-cyan-400"
