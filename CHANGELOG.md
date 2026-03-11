@@ -36,6 +36,7 @@ All notable changes to NEXULEAN are documented in this file.
 
 ### 🔒 Security
 
+- **CVE-2026-32138 fixed** — Hardcoded Firebase API keys and Web3Forms access key removed from source code. All credentials are now read from environment variables (`NEXT_PUBLIC_FIREBASE_*`, `NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY`). A `.env.example` template is provided; copy it to `.env.local` and supply real values — the app throws a clear startup error when any required variable is missing.
 - Security headers configured in `netlify.toml`.
 - Private vulnerability reporting enabled via GitHub Security Advisories.
 - `.env.local` excluded from version control.
