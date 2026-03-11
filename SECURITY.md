@@ -6,7 +6,8 @@ We are committed to fixing security vulnerabilities in the following versions of
 
 | Version | Supported          |
 | ------- | ------------------ |
-| 1.0.x   | :white_check_mark: |
+| 2.0.x   | :white_check_mark: |
+| 1.0.x   | :x:                |
 | < 1.0   | :x:                |
 
 ## Reporting a Vulnerability
@@ -59,6 +60,32 @@ The following are **out of scope**:
 - Keep dependencies up-to-date and run `npm audit` before submitting a pull request.
 - Follow the [OWASP Top 10](https://owasp.org/www-project-top-ten/) guidelines when adding new features.
 - Use parameterised inputs and validate all user-supplied data with [Zod](https://zod.dev/) schemas.
+
+## Known Vulnerabilities & Fixes
+
+### CVE-2026-32138 — Hardcoded API Key Exposure (FIXED in v2.0.0)
+
+| Field       | Detail                                              |
+|-------------|-----------------------------------------------------|
+| CVE ID      | CVE-2026-32138                                      |
+| Severity    | **Critical** (CVSS 3.1: 9.1 — AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:N) |
+| CWEs        | CWE-284, CWE-312, CWE-540, CWE-798, CWE-922        |
+| Affected    | v1.0.0                                              |
+| Patched     | v2.0.0                                              |
+| Reporter    | @rootcrypt                                          |
+
+**Description:** Firebase API keys and a Web3Forms access key were hardcoded directly in
+`lib/firebase.ts` and the contact/projects pages, allowing any unauthenticated user to
+query Firebase project configuration, create unauthorized accounts, and read all Firestore
+user documents without authentication.
+
+**Fix:** All sensitive credentials have been removed from source code and are now read
+exclusively from environment variables (`NEXT_PUBLIC_FIREBASE_*` and
+`NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY`). A `.env.example` template is provided; a `.env.local`
+file (git-ignored) must be created with the real values before running the application.
+The application throws a startup error if any required Firebase variable is absent.
+
+---
 
 ## Acknowledgements
 
